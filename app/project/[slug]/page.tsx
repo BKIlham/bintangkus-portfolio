@@ -1,6 +1,6 @@
 "use client";
 
-import { use } from "react";
+import { use, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, GithubLogo, ArrowUpRight } from "@phosphor-icons/react";
