@@ -113,7 +113,7 @@ export default function Galleria() {
                 </div>
 
                 {/* Dekorasi Kaset Tape (Opacity rendah di BG) */}
-                <div className="absolute left-[30%] top-[-20%] text-[#C76A39] scale-[4] lg:scale-[6] opacity-10 pointer-events-none z-0 rotate-12">
+                <div className="absolute left-[40%] lg:left-[20%] top-[8%] text-tech-alert scale-[10] lg:scale-[20] pointer-events-none z-0">
                   <CassetteTape weight="duotone" />
                 </div>
 
@@ -156,7 +156,7 @@ export default function Galleria() {
                 </div>
 
                 {/* MOBILE SCREENSHOT STATIS (Hanya muncul di HP, hidden di Tablet/PC) */}
-                <div className="relative w-full aspect-video mt-8 rounded-lg overflow-hidden border-2 border-charcoal md:hidden z-20 shadow-md">
+                <div className="relative w-full aspect-video mt-8 rounded-lg overflow-hidden border-2 border-tech-alert md:hidden z-20 shadow-md">
                   <Image src={project.image} alt={project.title} fill className="object-cover" />
                 </div>
 

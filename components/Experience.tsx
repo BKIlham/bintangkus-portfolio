@@ -13,18 +13,24 @@ const experiences = [
   },
   {
     id: 2,
+    company: "PT Cazh Teknologi Inovasi",
+    role: "Web Developer Intern",
+    date: "July 2024 - September 2024",
+  },
+  {
+    id: 3,
     company: "Sircle (Student Research Group)",
     role: "Head of Software & Mobile Engineering",
     date: "July 2023 - July 2024",
   },
   {
-    id: 3,
+    id: 4,
     company: "Ngoprek UI/UX Event",
     role: "Workshop Speaker & Lead Mentor",
     date: "Oct 2023 - Nov 2023",
   },
   {
-    id: 4,
+    id: 5,
     company: "Telkom University Purwokerto",
     role: "Practicum Assistant",
     date: "March 2023 - July 2023",

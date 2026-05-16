@@ -1,12 +1,36 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { Planet, CassetteTape, EnvelopeSimple } from "@phosphor-icons/react";
+import { Planet, CassetteTape, EnvelopeSimple, ArticleIcon } from "@phosphor-icons/react";
 
 export default function Navbar() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  // Deteksi scroll untuk mengubah background navbar jadi sticky glassmorphism
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Fungsi agar scroll dari Navbar smooth (tidak teleport/blink)
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    const target = document.getElementById(targetId);
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   useGSAP(() => {
     gsap.to(".orbit-rotate", {
@@ -25,7 +49,15 @@ export default function Navbar() {
   }, { scope: containerRef });
 
   return (
-    <nav ref={containerRef} className="w-full flex justify-between items-center px-6 lg:px-12 py-6 relative z-50 select-none">
+    <nav 
+      ref={containerRef} 
+      // FIX: Pakai fixed agar sticky, dan transisi background dinamis
+      className={`fixed top-0 left-0 w-full flex justify-between items-center px-6 lg:px-12 z-[100] select-none transition-all duration-300 ${
+        isScrolled 
+          ? "py-4 bg-[#181818]/90 backdrop-blur-md shadow-lg border-b border-white/5" 
+          : "py-6 bg-transparent"
+      }`}
+    >
       
       {/* LEFT: Logo Section */}
       <div className="relative flex flex-col">
@@ -61,10 +93,15 @@ export default function Navbar() {
         </div>
       </div>
 
-      {/* RIGHT: Section List (Responsif: Teks hilang di HP, muncul di md/Tablet ke atas) */}
+      {/* RIGHT: Section List */}
       <div className="flex gap-6 lg:gap-10 items-center">
+        
         {/* Nav Item: ABOUT */}
-        <a href="#about" className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative">
+        <a 
+          href="#about" 
+          onClick={(e) => handleSmoothScroll(e, "about")}
+          className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative"
+        >
           <div className="relative w-6 h-6 lg:w-5 lg:h-5 text-nav-muted group-hover:text-brand-orange transition-colors">
             <Planet size="100%" weight="duotone" className="relative z-10" />
             <svg className="orbit-rotate absolute inset-0 w-full h-full opacity-50 hidden lg:block" viewBox="0 0 100 100">
@@ -77,8 +114,30 @@ export default function Navbar() {
           </span>
         </a>
 
+        {/* Nav Item: EXPERIENCE */}
+        <a 
+          href="#experience" 
+          onClick={(e) => handleSmoothScroll(e, "experience")}
+          className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative"
+        >
+          <div className="relative w-6 h-6 lg:w-5 lg:h-5 text-nav-muted group-hover:text-brand-orange transition-colors">
+            <ArticleIcon size="100%" weight="duotone" className="relative z-10" />
+            <svg className="orbit-rotate absolute inset-0 w-full h-full opacity-50 hidden lg:block" viewBox="0 0 100 100">
+              <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="3 6" />
+            </svg>
+          </div>
+          <span className="relative hidden md:block">
+            EX<span className="relative z-10">PERIENCE</span>
+            <span className="absolute bottom-[-4px] left-0 w-[25%] h-[3px] bg-charcoal border border-brand-accent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          </span>
+        </a>
+
         {/* Nav Item: GALLERIA */}
-        <a href="#galleria" className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative">
+        <a 
+          href="#galleria" 
+          onClick={(e) => handleSmoothScroll(e, "galleria")}
+          className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative"
+        >
           <div className="relative w-6 h-6 lg:w-5 lg:h-5 text-nav-muted group-hover:text-brand-orange transition-colors">
             <CassetteTape size="100%" weight="duotone" className="relative z-10" />
             <svg className="orbit-rotate-slow absolute inset-0 w-full h-full opacity-50 hidden lg:block" viewBox="0 0 100 100">
@@ -92,7 +151,11 @@ export default function Navbar() {
         </a>
 
         {/* Nav Item: CONTACT */}
-        <a href="#contact" className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative">
+        <a 
+          href="#contact" 
+          onClick={(e) => handleSmoothScroll(e, "contact")}
+          className="group flex items-center gap-2 text-text-light font-futura tracking-wider text-sm relative"
+        >
           <div className="relative w-6 h-6 lg:w-5 lg:h-5 text-nav-muted group-hover:text-brand-orange transition-colors">
             <EnvelopeSimple size="100%" weight="duotone" className="relative z-10" />
             <svg className="orbit-rotate absolute inset-0 w-full h-full opacity-50 hidden lg:block" viewBox="0 0 100 100">
