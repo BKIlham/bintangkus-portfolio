@@ -11,6 +11,30 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+@theme {
+  /* --- Color Palette --- */
+  --color-bg-dark: #181818;
+  --color-bg-base: #F5EDDC;
+  --color-text-primary: #EADEC6;
+  --color-text-light: #F5EDDC;
+  --color-charcoal: #31312F;
+
+  /* Brand & Accents */
+  --color-brand-orange: #AA6032;
+  --color-brand-orange-light: #DF7841;
+  --color-brand-accent: #CA6038;
+  --color-brand-orbit: #CF612B;
+  --color-nav-muted: #A69B93;
+  --color-tech-bg: #2B2324;
+  --color-tech-alert: #C76A39;
+  --color-disabled-icon: #EADEC6;
+
+  /* --- Custom Fonts --- */
+  --font-helvetica: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-futura: "Futura MD BT", "Futura", sans-serif;
+  --font-futura-book: "Futura Bk BT", "Futura", sans-serif;
+  --font-jetbrains: "JetBrains Mono", monospace;
+}
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -19,8 +43,53 @@
   }
 }
 
+@layer utilities {
+
+  .shadow-cta {
+    box-shadow: -5px -4px 0px 0px #181818;
+  }
+
+  .shadow-project {
+    box-shadow: 7px 8px 8px 0px rgba(0, 0, 0, 0.25);
+  }
+
+  .text-glitch {
+    text-shadow:
+      1px -1px 2px rgba(0, 251, 255, 0.5),
+      -1px 1px 2px rgba(255, 0, 0, 0.5);
+  }
+
+  .bg-blueprint {
+    background-color: #F5EDDC;
+    background-image:
+      linear-gradient(to right, #EADEC6 1px, transparent 1px),
+      linear-gradient(to bottom, #EADEC6 1px, transparent 1px);
+    background-size: 40px 40px;
+    position: relative;
+  }
+
+  .bg-blueprint::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(45deg, #EADEC6 0.5px, transparent 0.5px),
+      linear-gradient(-45deg, #EADEC6 0.5px, transparent 0.5px);
+    background-size: 40px 40px;
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .bg-dot-grid {
+    background-color: #181818;
+    background-image: radial-gradient(#31312F 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: var(--color-charcoal);
+  background-color: var(--color-bg-base);
+  overflow-x: hidden;
+  /* font-family: Arial, Helvetica, sans-serif; */
 }
